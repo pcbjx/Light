@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\ic_launcher.png",
+        "source": "C:\\code\\Android_code\\HC_BLE1\\app\\src\\main\\res\\drawable-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\bg_button_pressed.9.png",
+        "source": "C:\\code\\Android_code\\HC_BLE1\\app\\src\\main\\res\\drawable-hdpi\\bg_button_pressed.9.png"
+    },
+    {
+        "merged": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\hc.png",
+        "source": "C:\\code\\Android_code\\HC_BLE1\\app\\src\\main\\res\\drawable-hdpi\\hc.png"
+    },
+    {
+        "merged": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi\\bg_button.9.png",
+        "source": "C:\\code\\Android_code\\HC_BLE1\\app\\src\\main\\res\\drawable-hdpi\\bg_button.9.png"
+    }
+]

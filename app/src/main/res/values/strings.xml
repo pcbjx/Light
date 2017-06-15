@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">灯控</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_dsp_main">dsp_main</string>
+    <string name="sie_dsp">SIE_DSP</string>
+    <string name="vol">volume:</string>
+    <string name="setting">Setting</string>
+    <string name="title_activity_dsp_setting">dsp_setting</string>
+    <string name="connect_status_dis">未连接</string>
+    <string name="connect_status_ing">连接中</string>
+    <string name="connect_status_connect">已连接</string>
+    <string name="BtnBack">返回</string>
+    <string name="title_main">汽车灯</string>
+    <string name="lightModeTips">请先选择模式</string>
+    <string name="lightPositionTips">请先灯类型</string>
+    <string name="title_activity_dsp_setting_delay">dsp_setting_delay</string>
+    <string name="title_activity_bsp_setting_chanel">bsp_setting_chanel</string>
+    <string name="title_activity_dsp_setting_main">dsp_setting_main</string>
+
+    <string name="fre">频率</string>
+    <string name="lightseek">亮度</string>
+
+    <string name="scan">扫描</string>
+    <string name="stopscan">停止扫描</string>
+    
+    <string name="not_support_ble">不支持BLE</string>
+
+
+</resources>

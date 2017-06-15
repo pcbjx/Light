@@ -1,0 +1,405 @@
+package com.huicheng.ui;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import com.huicheng.service.*;
+import android.app.Activity;
+import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothGattDescriptor;
+import android.bluetooth.BluetoothGattService;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.ServiceConnection;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ScrollView;
+import android.widget.TextView;
+
+import com.huicheng.R;
+import com.huicheng.service.BluetoothLeService;
+
+/**
+ * ????????HC_BLE????????????????????????????§Ù??????APP?????????????08???????
+ * ??????????????·Ú4.3??????????4.0???????¨¢?
+ * ???????????05??06??????????????????2.0?????APP????????????§Û???????????????????????
+ * ??????????????????????????08????????????§à???????????????????????????????????????????????????
+ * **/
+
+/**
+ * @Description:  TODO<Ble_Activity???????BLE,????????BLE??????> 
+ * @author  ??????????????????
+ * @data:  2014-10-20 ????12:12:04 
+ * @version:  V1.0
+ */
+public class Ble_Activity extends Activity implements OnClickListener {
+
+	private final static String TAG = Ble_Activity.class.getSimpleName();
+	//????4.0??UUID,????0000ffe1-0000-1000-8000-00805f9b34fb???????????????????08????????UUID
+	public static String HEART_RATE_MEASUREMENT = "0000ffe1-0000-1000-8000-00805f9b34fb";
+	public static String EXTRAS_DEVICE_NAME = "DEVICE_NAME";;
+	public static String EXTRAS_DEVICE_ADDRESS = "DEVICE_ADDRESS";
+	public static String EXTRAS_DEVICE_RSSI = "RSSI";
+	//??????????
+	private boolean mConnected = false;
+	private String status = "disconnected";
+	//????????
+	private String mDeviceName;
+	//???????
+	private String mDeviceAddress;
+	//????????
+	private String mRssi;
+	private Bundle b;
+	private String rev_str = "";
+	//????service,????????????????
+	private static BluetoothLeService mBluetoothLeService;
+	//?????????????????
+	private TextView rev_tv, connect_state;
+	//??????
+	private Button send_btn;
+	//???????
+	private EditText send_et;
+	private ScrollView rev_sv;
+	private ArrayList<ArrayList<BluetoothGattCharacteristic>> mGattCharacteristics = new ArrayList<ArrayList<BluetoothGattCharacteristic>>();
+	//?????????
+	private static BluetoothGattCharacteristic target_chara = null;
+	private Handler mhandler = new Handler();
+	private Handler myHandler = new Handler()
+	{
+		// 2.??§Õ?????????
+		public void handleMessage(Message msg)
+		{
+			switch (msg.what)
+			{
+				// ?§Ø????????
+				case 1:
+				{
+					// ????View
+					String state = msg.getData().getString("connect_state");
+					connect_state.setText(state);
+
+					break;
+				}
+
+			}
+			super.handleMessage(msg);
+		}
+
+	};
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.ble_activity);
+		b = getIntent().getExtras();
+		//????????????????????
+		mDeviceName = b.getString(EXTRAS_DEVICE_NAME);
+		mDeviceAddress = b.getString(EXTRAS_DEVICE_ADDRESS);
+		mRssi = b.getString(EXTRAS_DEVICE_RSSI);
+
+		/* ????????service */
+		Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
+		bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+		init();
+
+	}
+
+	@Override
+	protected void onDestroy()
+	{
+		super.onDestroy();
+		//???????????
+		unregisterReceiver(mGattUpdateReceiver);
+		mBluetoothLeService = null;
+	}
+
+	// Activity????????????????????????????????????????
+	@Override
+	protected void onResume()
+	{
+		super.onResume();
+		//?????????
+		registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter());
+		if (mBluetoothLeService != null)
+		{
+			//?????????????????????
+			final boolean result = mBluetoothLeService.connect(mDeviceAddress);
+			Log.d(TAG, "Connect request result=" + result);
+		}
+	}
+
+	/**
+	 * @Title: init
+	 * @Description: TODO(?????UI???)
+	 * @param  ??
+	 * @return void
+	 * @throws
+	 */
+	private void init()
+	{
+		rev_sv = (ScrollView) this.findViewById(R.id.rev_sv);
+		rev_tv = (TextView) this.findViewById(R.id.rev_tv);
+		connect_state = (TextView) this.findViewById(R.id.connect_state);
+		send_btn = (Button) this.findViewById(R.id.send_btn);
+		send_et = (EditText) this.findViewById(R.id.send_et);
+		connect_state.setText(status);
+		send_btn.setOnClickListener(this);
+
+	}
+
+	/* BluetoothLeService????????? */
+	private final ServiceConnection mServiceConnection = new ServiceConnection()
+	{
+
+		@Override
+		public void onServiceConnected(ComponentName componentName,
+									   IBinder service)
+		{
+			mBluetoothLeService = ((BluetoothLeService.LocalBinder) service)
+					.getService();
+			if (!mBluetoothLeService.initialize())
+			{
+				Log.e(TAG, "Unable to initialize Bluetooth");
+				finish();
+			}
+			// Automatically connects to the device upon successful start-up
+			// initialization.
+			// ??????????????????õô
+			mBluetoothLeService.connect(mDeviceAddress);
+
+		}
+
+		@Override
+		public void onServiceDisconnected(ComponentName componentName)
+		{
+			mBluetoothLeService = null;
+		}
+
+	};
+
+	/**
+	 * ?????????????????BluetoothLeService?????????
+	 */
+	private final BroadcastReceiver mGattUpdateReceiver = new BroadcastReceiver()
+	{
+		@Override
+		public void onReceive(Context context, Intent intent)
+		{
+			final String action = intent.getAction();
+			if (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action))//Gatt??????
+			{
+				mConnected = true;
+				status = "connected";
+				//??????????
+				updateConnectionState(status);
+				System.out.println("BroadcastReceiver :" + "device connected");
+
+			} else if (BluetoothLeService.ACTION_GATT_DISCONNECTED//Gatt???????
+					.equals(action))
+			{
+				mConnected = false;
+				status = "disconnected";
+				//??????????
+				updateConnectionState(status);
+				System.out.println("BroadcastReceiver :"
+						+ "device disconnected");
+
+			} else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED//????GATT??????
+					.equals(action))
+			{
+				// Show all the supported services and characteristics on the
+				// user interface.
+				//????õô??????????????
+				displayGattServices(mBluetoothLeService
+						.getSupportedGattServices());
+				System.out.println("BroadcastReceiver :"
+						+ "device SERVICES_DISCOVERED");
+			} else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action))//??§¹????
+			{
+				//???????????????
+				displayData(intent.getExtras().getString(
+						BluetoothLeService.EXTRA_DATA));
+				System.out.println("BroadcastReceiver onData:"
+						+ intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
+			}
+		}
+	};
+
+	/* ?????????? */
+	private void updateConnectionState(String status)
+	{
+		Message msg = new Message();
+		msg.what = 1;
+		Bundle b = new Bundle();
+		b.putString("connect_state", status);
+		msg.setData(b);
+		//?????????????UI??textview??
+		myHandler.sendMessage(msg);
+		System.out.println("connect_state:" + status);
+
+	}
+
+	/* ????????? */
+	private static IntentFilter makeGattUpdateIntentFilter()
+	{
+		final IntentFilter intentFilter = new IntentFilter();
+		intentFilter.addAction(BluetoothLeService.ACTION_GATT_CONNECTED);
+		intentFilter.addAction(BluetoothLeService.ACTION_GATT_DISCONNECTED);
+		intentFilter
+				.addAction(BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED);
+		intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
+		return intentFilter;
+	}
+
+	/**
+	 * @Title: displayData
+	 * @Description: TODO(?????????????scrollview?????)
+	 * @param @param rev_string(?????????)
+	 * @return void
+	 * @throws
+	 */
+	private void displayData(String rev_string)
+	{
+		rev_str += rev_string;
+		runOnUiThread(new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				rev_tv.setText(rev_str);
+				rev_sv.scrollTo(0, rev_tv.getMeasuredHeight());
+				System.out.println("rev:" + rev_str);
+			}
+		});
+
+	}
+
+	/**
+	 * @Title: displayGattServices
+	 * @Description: TODO(????????????)
+	 * @param ??
+	 * @return void
+	 * @throws
+	 */
+	private void displayGattServices(List<BluetoothGattService> gattServices)
+	{
+
+		if (gattServices == null)
+			return;
+		String uuid = null;
+		String unknownServiceString = "unknown_service";
+		String unknownCharaString = "unknown_characteristic";
+
+		// ????????,??????????§Ò??????????
+		ArrayList<HashMap<String, String>> gattServiceData = new ArrayList<HashMap<String, String>>();
+
+		// ??????????????????????????????????????
+		ArrayList<ArrayList<HashMap<String, String>>> gattCharacteristicData = new ArrayList<ArrayList<HashMap<String, String>>>();
+
+		// ?????¦²??????????????
+		mGattCharacteristics = new ArrayList<ArrayList<BluetoothGattCharacteristic>>();
+
+		// Loops through available GATT Services.
+		for (BluetoothGattService gattService : gattServices)
+		{
+
+			// ????????§Ò?
+			HashMap<String, String> currentServiceData = new HashMap<String, String>();
+			uuid = gattService.getUuid().toString();
+
+			// ????????uuid????????????????SampleGattAttributes?????????????
+
+			gattServiceData.add(currentServiceData);
+
+			System.out.println("Service uuid:" + uuid);
+
+			ArrayList<HashMap<String, String>> gattCharacteristicGroupData = new ArrayList<HashMap<String, String>>();
+
+			// ?????????????????§Ø????????§Ò?
+			List<BluetoothGattCharacteristic> gattCharacteristics = gattService
+					.getCharacteristics();
+
+			ArrayList<BluetoothGattCharacteristic> charas = new ArrayList<BluetoothGattCharacteristic>();
+
+			// Loops through available Characteristics.
+			// ???????????????????§Ö??????????
+			for (final BluetoothGattCharacteristic gattCharacteristic : gattCharacteristics)
+			{
+				charas.add(gattCharacteristic);
+				HashMap<String, String> currentCharaData = new HashMap<String, String>();
+				uuid = gattCharacteristic.getUuid().toString();
+
+				if (gattCharacteristic.getUuid().toString()
+						.equals(HEART_RATE_MEASUREMENT))
+				{
+					// ?????????Characteristic?????????mOnDataAvailable.onCharacteristicRead()
+					mhandler.postDelayed(new Runnable()
+					{
+
+						@Override
+						public void run()
+						{
+							// TODO Auto-generated method stub
+							mBluetoothLeService
+									.readCharacteristic(gattCharacteristic);
+						}
+					}, 200);
+
+					// ????Characteristic??§Õ????,???????????????????mOnDataAvailable.onCharacteristicWrite()
+					mBluetoothLeService.setCharacteristicNotification(
+							gattCharacteristic, true);
+					target_chara = gattCharacteristic;
+					// ????????????
+					// ?????????§Õ??????
+					// mBluetoothLeService.writeCharacteristic(gattCharacteristic);
+				}
+				List<BluetoothGattDescriptor> descriptors = gattCharacteristic
+						.getDescriptors();
+				for (BluetoothGattDescriptor descriptor : descriptors)
+				{
+					System.out.println("---descriptor UUID:"
+							+ descriptor.getUuid());
+					// ??????????????
+					mBluetoothLeService.getCharacteristicDescriptor(descriptor);
+					// mBluetoothLeService.setCharacteristicNotification(gattCharacteristic,
+					// true);
+				}
+
+				gattCharacteristicGroupData.add(currentCharaData);
+			}
+			// ??????????¦Ç?????????????§µ?????????
+			mGattCharacteristics.add(charas);
+			// ?????????????§Ò?????????????????
+			gattCharacteristicData.add(gattCharacteristicGroupData);
+
+		}
+
+	}
+
+	/* 
+	 * ??????????????????????????????????
+	 */
+	@Override
+	public void onClick(View v)
+	{
+		// TODO Auto-generated method stub
+		byte [] sendbuf = new byte[]  {1,2,3,4,5,6,7};
+		//target_chara.setValue(send_et.getText().toString());
+		target_chara.setValue(sendbuf);
+		//?????????????§Õ???????????????????
+		mBluetoothLeService.writeCharacteristic(target_chara);
+	}
+
+}

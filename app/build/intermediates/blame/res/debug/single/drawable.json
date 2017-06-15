@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\btn_press.xml",
+        "source": "C:\\code\\Android_code\\HC_BLE1\\app\\src\\main\\res\\drawable\\btn_press.xml"
+    },
+    {
+        "merged": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\btn_normal.xml",
+        "source": "C:\\code\\Android_code\\HC_BLE1\\app\\src\\main\\res\\drawable\\btn_normal.xml"
+    },
+    {
+        "merged": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\load_welcome.jpg",
+        "source": "C:\\code\\Android_code\\HC_BLE1\\app\\src\\main\\res\\drawable\\load_welcome.jpg"
+    },
+    {
+        "merged": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\btn.xml",
+        "source": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\exploded-aar\\HC_BLE1\\ColorPalette\\unspecified\\res\\drawable\\btn.xml"
+    },
+    {
+        "merged": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\timg.jpg",
+        "source": "C:\\code\\Android_code\\HC_BLE1\\app\\src\\main\\res\\drawable\\timg.jpg"
+    }
+]

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.huicheng"
+    android:versionCode="1"
+    android:versionName="1.2" >
+
+    <uses-sdk
+        android:minSdkVersion="18"
+        android:targetSdkVersion="24" />
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
+    <android:uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:name="com.android.tools.fd.runtime.BootstrapApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Light.NoTitleBar" >
+        <activity
+            android:name="com.huicheng.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.huicheng.ui.Ble_Activity"
+            android:exported="true" />
+        <activity
+            android:name="com.huicheng.ui.Ble_Color_Light_Activity"
+            android:exported="true" />
+
+        <service
+            android:name="com.huicheng.service.BluetoothLeService"
+            android:enabled="true" />
+
+        <activity
+            android:name="sie.amplifier_conctroller.ui.dsp_main"
+            android:label="@string/title_activity_dsp_main" />
+        <activity
+            android:name="sie.amplifier_conctroller.ui.dsp_setting"
+            android:label="@string/title_activity_dsp_setting" />
+        <activity
+            android:name="sie.amplifier_conctroller.ui.dsp_setting_delay"
+            android:label="@string/title_activity_dsp_setting_delay" />
+        <activity
+            android:name="sie.amplifier_conctroller.ui.dsp_setting_chanel"
+            android:label="@string/title_activity_bsp_setting_chanel" />
+        <activity
+            android:name="sie.amplifier_conctroller.ui.dsp_setting_main"
+            android:label="@string/title_activity_dsp_setting_main" />
+    </application>
+
+</manifest>

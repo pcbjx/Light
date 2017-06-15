@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="deep_blue">#0000ff</color>
+    <color name="zhou_normal">#00000000</color>
+    <color name="zhou_pressed">#03a9f4</color>
+    <declare-styleable name="MyToolBar"><attr format="boolean" name="showTitle"/><attr format="string" name="textTitle"/><attr format="dimension" name="titleTextSize"/><attr format="color" name="titleTextColor"/><attr format="color" name="leftButtonBackground"/><attr format="string" name="leftButtonText"/><attr format="color" name="leftButtonTextColor"/><attr format="dimension" name="leftButtonTextSize"/><attr format="color" name="rightButtonBackground"/><attr format="string" name="rightButtonText"/><attr format="color" name="rightButtonTextColor"/><attr format="dimension" name="rightButtonTextSize"/></declare-styleable>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <string name="BtnBack">返回</string>
+    <string name="app_name">灯控</string>
+    <string name="connect_status_connect">已连接</string>
+    <string name="connect_status_dis">未连接</string>
+    <string name="connect_status_ing">连接中</string>
+    <string name="fre">频率</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="lightModeTips">请先选择模式</string>
+    <string name="lightPositionTips">请先灯类型</string>
+    <string name="lightseek">亮度</string>
+    <string name="not_support_ble">不支持BLE</string>
+    <string name="scan">扫描</string>
+    <string name="setting">Setting</string>
+    <string name="sie_dsp">SIE_DSP</string>
+    <string name="stopscan">停止扫描</string>
+    <string name="title_activity_bsp_setting_chanel">bsp_setting_chanel</string>
+    <string name="title_activity_dsp_main">dsp_main</string>
+    <string name="title_activity_dsp_setting">dsp_setting</string>
+    <string name="title_activity_dsp_setting_delay">dsp_setting_delay</string>
+    <string name="title_activity_dsp_setting_main">dsp_setting_main</string>
+    <string name="title_main">汽车灯</string>
+    <string name="vol">volume:</string>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+</resources>

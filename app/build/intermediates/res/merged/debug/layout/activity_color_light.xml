@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="5dp"
+    android:id="@+id/colorLayout">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            >
+
+            <Button
+                android:id="@+id/bt_logo"
+                android:textSize="20sp"
+                android:onClick="Color"
+                android:background="@drawable/timg"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:layout_weight="3"
+            />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"></View>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="7"
+                android:text="@string/app_name"
+                android:gravity="center_horizontal|center_vertical"
+                android:textSize = "30sp"
+                />
+
+            <Button
+                android:id="@+id/bt_connect_status"
+                android:text="@string/connect_status_ing"
+                android:textSize="20sp"
+                android:textColor="@color/deep_blue"
+                android:onClick="Color"
+                android:background="@null"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:backgroundTint="@drawable/btn_press" />
+
+        </LinearLayout>
+
+        <!--<com.huicheng.ui.MyToolBar-->
+            <!--android:id="@+id/myToolBar"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_weight="0.8"-->
+            <!--custom:leftButtonBackground="@null"-->
+            <!--custom:leftButtonText="@string/BtnBack"-->
+            <!--custom:leftButtonTextColor="#0000ff"-->
+            <!--custom:leftButtonTextSize="8sp"-->
+            <!--custom:rightButtonBackground="@null"-->
+            <!--custom:rightButtonText="@string/connect_status_dis"-->
+            <!--custom:rightButtonTextColor="#0000ff"-->
+            <!--custom:rightButtonTextSize="8sp"-->
+            <!--custom:textTitle="MyTitle"-->
+            <!--custom:titleTextColor="#A10000"-->
+            <!--custom:titleTextSize="8sp" >-->
+        <!--</com.huicheng.ui.MyToolBar>-->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1">
+
+        </View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/open"
+                android:text="打开"
+                android:textSize="20sp"
+                android:onClick="Color"
+                android:background="@drawable/btn_normal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:backgroundTint="@drawable/btn_press" />
+            <Button
+                android:id="@+id/close"
+                android:text="关闭"
+                android:textSize="20sp"
+                android:background="@drawable/btn_normal"
+                android:layout_width="0dp"
+                android:onClick="Color"
+                android:layout_marginLeft="5dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_light_left"
+                android:text="左"
+                android:textSize="20sp"
+                android:onClick="Color"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_normal"
+                />
+            <Button
+                android:id="@+id/bt_light_front"
+                android:text="前"
+                android:textSize="20sp"
+                android:onClick="Color"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/btn_normal"/>
+
+            <Button
+                android:id="@+id/bt_light_right"
+                android:text="右"
+                android:textSize="20sp"
+                android:layout_width="0dp"
+                android:onClick="Color"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+
+                android:background="@drawable/btn_normal"/>
+
+            <Button
+                android:id="@+id/bt_light_all"
+                android:text="全"
+                android:layout_width="0dp"
+                android:onClick="Color"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:background="@drawable/btn_normal"/>
+
+        </LinearLayout>
+
+
+
+        <zhou.colorpalette.core.ColorPalette
+            android:id="@+id/zhou_fragment_color"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+
+        </zhou.colorpalette.core.ColorPalette>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:gravity="center_horizontal|center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/lightseek"
+                android:textSize="20sp"
+                android:gravity="center_horizontal|center_vertical"
+                android:layout_weight="2"/>
+            <SeekBar
+                android:id="@+id/seekbarLightseek"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="8"
+
+                style="@android:style/Widget.DeviceDefault.Light.SeekBar"
+                android:max="100"/>
+
+        </LinearLayout>
+
+        <!--<View-->
+            <!--android:id="@+id/view"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_weight="9"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentTop="true"-->
+             <!--/>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal|center_vertical">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="@string/fre"
+                android:textSize="20sp"
+                android:gravity="center_horizontal|center_vertical"
+                android:layout_weight="2"/>
+            <SeekBar
+                android:id="@+id/seekbarSpeed"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="8"
+
+                style="@android:style/Widget.DeviceDefault.Light.SeekBar"
+                android:max="5"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/bt_mode_color"
+                android:text="吸盘"
+                android:textSize="20sp"
+                android:onClick="Color"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:background="@drawable/btn_normal"/>
+            <Button
+                android:id="@+id/bt_mode_run"
+                android:text="呼吸"
+                android:textSize="20sp"
+                android:onClick="Color"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_normal"/>
+            <Button
+                android:id="@+id/bt_mode_multi_color"
+                android:text="七彩"
+                android:textSize="20sp"
+                android:layout_width="0dp"
+                android:onClick="Color"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/btn_normal"/>
+
+            <Button
+                android:id="@+id/bt_mode_twinkle"
+                android:text="闪烁"
+                android:textSize="20sp"
+                android:layout_width="0dp"
+                android:onClick="Color"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/btn_normal"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

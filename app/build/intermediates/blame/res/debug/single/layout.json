@@ -1,0 +1,46 @@
+[
+    {
+        "merged": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\res\\merged\\debug\\layout\\listitem.xml",
+        "source": "C:\\code\\Android_code\\HC_BLE1\\app\\src\\main\\res\\layout\\listitem.xml"
+    },
+    {
+        "merged": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\res\\merged\\debug\\layout\\dsp_main.xml",
+        "source": "C:\\code\\Android_code\\HC_BLE1\\app\\src\\main\\res\\layout\\dsp_main.xml"
+    },
+    {
+        "merged": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\res\\merged\\debug\\layout\\ble_activity.xml",
+        "source": "C:\\code\\Android_code\\HC_BLE1\\app\\src\\main\\res\\layout\\ble_activity.xml"
+    },
+    {
+        "merged": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_dsp_setting_delay.xml",
+        "source": "C:\\code\\Android_code\\HC_BLE1\\app\\src\\main\\res\\layout\\activity_dsp_setting_delay.xml"
+    },
+    {
+        "merged": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_dsp_setting_chanel.xml",
+        "source": "C:\\code\\Android_code\\HC_BLE1\\app\\src\\main\\res\\layout\\activity_dsp_setting_chanel.xml"
+    },
+    {
+        "merged": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\res\\merged\\debug\\layout\\zhou_activity_color.xml",
+        "source": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\exploded-aar\\HC_BLE1\\ColorPalette\\unspecified\\res\\layout\\zhou_activity_color.xml"
+    },
+    {
+        "merged": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_dsp_setting.xml",
+        "source": "C:\\code\\Android_code\\HC_BLE1\\app\\src\\main\\res\\layout\\activity_dsp_setting.xml"
+    },
+    {
+        "merged": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_color_light.xml",
+        "source": "C:\\code\\Android_code\\HC_BLE1\\app\\src\\main\\res\\layout\\activity_color_light.xml"
+    },
+    {
+        "merged": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\res\\merged\\debug\\layout\\zhou_fragment_color.xml",
+        "source": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\exploded-aar\\HC_BLE1\\ColorPalette\\unspecified\\res\\layout\\zhou_fragment_color.xml"
+    },
+    {
+        "merged": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_dsp_setting_main.xml",
+        "source": "C:\\code\\Android_code\\HC_BLE1\\app\\src\\main\\res\\layout\\activity_dsp_setting_main.xml"
+    },
+    {
+        "merged": "C:\\code\\Android_code\\HC_BLE1\\app\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",
+        "source": "C:\\code\\Android_code\\HC_BLE1\\app\\src\\main\\res\\layout\\activity_main.xml"
+    }
+]
